@@ -1,9 +1,9 @@
 import app from "./app";
-import { startDiscordBot } from './services/discordService';
-import { connectToDatabase } from './services/databaseService';
+import { startDiscordBot } from "./services/discordService";
+import { connectToDatabase } from "./services/databaseService";
 
 const PORT = process.env.PORT || 5000;
-const NODE_ENV = process.env.NODE_ENV || 'development';
+const NODE_ENV = process.env.NODE_ENV || "development";
 
 // Подключаемся к MongoDB
 connectToDatabase();
@@ -16,17 +16,17 @@ const server = app.listen(PORT, () => {
   console.log(`📊 Health check: http://localhost:${PORT}/api/v1/healthcheck`);
 });
 
-// Graceful shutdown
-process.on('SIGTERM', () => {
-  console.log('SIGTERM received, shutting down gracefully');
-  server.close(() => {
-    console.log('Process terminated');
-  });
-});
-
-process.on('SIGINT', () => {
-  console.log('SIGINT received, shutting down gracefully');
-  server.close(() => {
-    console.log('Process terminated');
-  });
-});
+// // Graceful shutdown
+// process.on('SIGTERM', () => {
+//   console.log('SIGTERM received, shutting down gracefully');
+//   server.close(() => {
+//     console.log('Process terminated');
+//   });
+// });
+//
+// process.on('SIGINT', () => {
+//   console.log('SIGINT received, shutting down gracefully');
+//   server.close(() => {
+//     console.log('Process terminated');
+//   });
+// });
