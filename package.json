@@ -1,14 +1,19 @@
 {
   "name": "dobrosvet",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
   "scripts": {
     "dev": "nodemon src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "build:client": "cd client && npm run build",
+    "build:client": "cd client && npm install && npm run build",
     "build:all": "npm run build:client && npm run build",
-    "dev:full": "npm run build:client && npm run dev"
+    "dev:full": "npm run build:client && npm run dev",
+    "postinstall": "npm run build"
   },
   "keywords": [],
   "author": "",

@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: dobrosvet-api
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build:all
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URL
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: DISCORD_TOKEN
+        sync: false
+      - key: DISCORD_CHANNEL_ID
+        sync: false
+      - key: DISCORD_AUTHOR_ID
+        sync: false
+      - key: WEBHOOK_URL
+        sync: false
+      - key: PINTEREST_ACCESS_TOKEN
+        sync: false
+      - key: PINTEREST_BOARD_ID
+        sync: false
+    healthCheckPath: /api/v1/healthcheck
+    autoDeploy: true 
