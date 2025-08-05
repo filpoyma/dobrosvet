@@ -34,7 +34,7 @@ app.disable("x-powered-by");
 // Ограничение частоты запросов
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 минут
-  limit: 100, // лимит 100 запросов с одного IP
+  limit: 500, // лимит 500 запросов с одного IP
 });
 app.use(limiter);
 

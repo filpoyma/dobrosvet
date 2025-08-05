@@ -47,6 +47,12 @@ function App() {
     setImageError("Ошибка загрузки изображения");
   };
 
+  // Обработчик успешной загрузки изображения
+  const handleImageLoad = () => {
+    setImageLoading(false);
+    setImageError("");
+  };
+
   const handleGenerateDescription = async () => {
     if (!imageUrl.trim()) {
       setError("Введите URL изображения");
@@ -105,7 +111,7 @@ function App() {
   return (
     <>
       <div>
-        <a href="https://svetville.ru/" target="_blank">
+        <a href="https://svetville.ru/" target="_blank" rel="noopener noreferrer">
           <img src={svetVilleIcon} className="logo" alt="SvetVille logo" />
         </a>
       </div>
@@ -121,6 +127,10 @@ function App() {
             placeholder="Введите URL изображения..."
             className="url-input"
             disabled={loading}
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="off"
+            spellCheck="false"
           />
 
           <textarea
@@ -130,6 +140,10 @@ function App() {
             rows={4}
             className="prompt-input"
             disabled={loading}
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="sentences"
+            spellCheck="true"
           />
 
           <textarea
@@ -139,6 +153,10 @@ function App() {
             rows={6}
             className="system-prompt-input"
             disabled={loading}
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="sentences"
+            spellCheck="true"
           />
 
           <div className="button-group">
@@ -146,6 +164,7 @@ function App() {
               onClick={handleGenerateDescription}
               disabled={loading || !imageUrl.trim() || !prompt.trim()}
               className="generate-button"
+              type="button"
             >
               {loading ? "Генерируем..." : "Генерировать описание"}
             </button>
@@ -182,7 +201,9 @@ function App() {
                   alt="Изображение для анализа"
                   className="preview-image"        
                   onError={handleImageError}
+                  onLoad={handleImageLoad}
                   style={{ display: imageLoading ? 'none' : 'block' }}
+                  loading="lazy"
                 />
               </div>
             )}
@@ -194,6 +215,10 @@ function App() {
                 className="title-edit-input"
                 placeholder="Заголовок"
                 disabled={loading}
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="sentences"
+                spellCheck="true"
               />
               <textarea
                 value={description}
@@ -202,11 +227,16 @@ function App() {
                 placeholder="Описание"
                 rows={3}
                 disabled={loading}
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="sentences"
+                spellCheck="true"
               />
               <button
                 className="pinterest-button"
                 onClick={handleSendToPinterest}
                 disabled={pinterestLoading || !title.trim() || !description.trim() || !imageUrl.trim()}
+                type="button"
               >
                 {pinterestLoading ? "Публикация..." : "Опубликовать в Pinterest"}
               </button>
