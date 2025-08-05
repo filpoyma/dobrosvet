@@ -68,20 +68,23 @@ client.on("messageCreate", async (message: Message) => {
 
   // Ищем промпт в сообщении
   const promptMatch = message.content.match(/^(.+?)(?:\s*--\s*|$)/);
-  if (!promptMatch) {
+  if (!message.content) {
     console.log("Промпт не найден в сообщении");
     return;
   }
 
-  let prompt = promptMatch[1].trim();
-  
+  let prompt = message.content.trim();
+
   // Извлекаем текст между двойными звездочками **
   const starMatch = prompt.match(/\*\*(.*?)\*\*/);
   if (starMatch) {
     prompt = starMatch[1].trim();
   } else {
     // Если нет двойных звездочек, очищаем от лишних звездочек в начале и конце
-    prompt = prompt.replace(/^\*\*+/, '').replace(/\*\*+$/, '').trim();
+    prompt = prompt
+      .replace(/^\*\*+/, "")
+      .replace(/\*\*+$/, "")
+      .trim();
   }
 
   // Ищем изображения в сообщении
